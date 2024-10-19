@@ -2,7 +2,7 @@
 using System;
 using System.Diagnostics.Metrics;
 
-namespace CalculadoraCS
+namespace CalculadoraCS.Application
 {
     class Program
     {
@@ -10,7 +10,8 @@ namespace CalculadoraCS
         {
             Menu menu = new Menu();
             string idCalc = menu.escolherCalculadora();
-            menu.interagir(idCalc);
+            int resultado = menu.interagir(idCalc);
+            menu.exibirResultado(resultado);
         }
     }
 }

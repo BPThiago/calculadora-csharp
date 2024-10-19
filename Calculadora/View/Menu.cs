@@ -21,7 +21,7 @@ namespace CalculadoraCS.View
             Console.Write("Escolha: ");
             return Console.ReadLine();
         }
-        public void interagir(string idCalc)
+        public int interagir(string idCalc)
         {
             ControllerCalculadora controller = new ControllerCalculadora(idCalc);
 
@@ -42,7 +42,11 @@ namespace CalculadoraCS.View
 
             int resultado = controller.calcular(num1, operador, num2);
 
-            Console.WriteLine("Resultado: " + resultado);
+            return resultado;
+        }
+
+        public void exibirResultado(int resultado) {
+            Console.WriteLine("O resultado da operação é: " + resultado);
         }
     }
 }
