@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace CalculadoraCS.Model.Operacao
 {
-    public interface IOperacao
+    public interface IOperacaoAvancada : IOperacao
     {
-        public int calcular(int num1, int num2);
-
-        public string Operador { get; }
-        public string Nome { get; }
     }
 }

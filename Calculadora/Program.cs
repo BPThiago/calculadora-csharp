@@ -9,7 +9,8 @@ namespace CalculadoraCS
         static void Main(string[] args)
         {
             Menu menu = new Menu();
-            menu.interagir();
+            string idCalc = menu.escolherCalculadora();
+            menu.interagir(idCalc);
         }
     }
 }
