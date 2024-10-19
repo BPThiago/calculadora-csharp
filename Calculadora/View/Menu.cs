@@ -1,4 +1,5 @@
 ﻿using CalculadoraCS.Controller;
+using CalculadoraCS.Model.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace CalculadoraCS.View
 {
     public class Menu 
     {
-        public string escolherCalculadora()
+        public RequestCalculadoraDTO escolherCalculadora()
         {
             Console.WriteLine("Escolha a calculadora que deseja:");
             Dictionary<string, string> calculadorasMap = ControllerCalculadora.getCalculadorasDisponiveis();
@@ -19,12 +20,10 @@ namespace CalculadoraCS.View
                 Console.WriteLine("(" + key + ") " + calculadorasMap[key]);
             }
             Console.Write("Escolha: ");
-            return Console.ReadLine();
+            return new RequestCalculadoraDTO(Console.ReadLine());
         }
-        public int interagir(string idCalc)
+        public RequestOperacaoDTO interagir(ControllerCalculadora controller)
         {
-            ControllerCalculadora controller = new ControllerCalculadora(idCalc);
-
             Console.Write("Insira o primeiro número: ");
             int num1 = int.Parse(Console.ReadLine());
 
@@ -40,13 +39,11 @@ namespace CalculadoraCS.View
             Console.Write("Insira o segundo número: ");
             int num2 = int.Parse(Console.ReadLine());
 
-            int resultado = controller.calcular(num1, operador, num2);
-
-            return resultado;
+            return new RequestOperacaoDTO(num1, operador, num2);
         }
 
-        public void exibirResultado(int resultado) {
-            Console.WriteLine("O resultado da operação é: " + resultado);
+        public void exibirResultado(ResponseOperacaoDTO responseOperacaoDTO) {
+            Console.WriteLine("O resultado da operação é: " + responseOperacaoDTO.Result);
         }
     }
 }

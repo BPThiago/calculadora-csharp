@@ -1,4 +1,5 @@
-﻿using CalculadoraCS.Model.Operacao;
+﻿using CalculadoraCS.Model.DTO;
+using CalculadoraCS.Model.Operacao;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace CalculadoraCS.Model.Calculadora
 {
     public interface ICalculadora
     {
-        public int calcular(int num1, string operador, int num2);
+        public ResponseOperacaoDTO calcular(RequestOperacaoDTO requestOperacaoDTO);
 
         public Dictionary<string, string> getOperacoesDisponiveis();
 

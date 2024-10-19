@@ -1,4 +1,5 @@
 ﻿using CalculadoraCS.Model.Calculadora;
+using CalculadoraCS.Model.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +12,14 @@ namespace CalculadoraCS.Controller
     {
         private ICalculadora calc;
 
-        public ControllerCalculadora(string id)
+        public ControllerCalculadora(RequestCalculadoraDTO requestCalculadoraDTO)
         {
-            calc = AbstractCalculadora.criar(id);
+            calc = AbstractCalculadora.criar(requestCalculadoraDTO);
         }
 
-        public int calcular(int num1, string operador, int num2)
+        public ResponseOperacaoDTO calcular(RequestOperacaoDTO requestOperacaoDTO)
         {
-            return calc.calcular(num1, operador, num2);
+            return calc.calcular(requestOperacaoDTO);
         }
 
         public Dictionary<string, string> getOperacoesDisponiveis()

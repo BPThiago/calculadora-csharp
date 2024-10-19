@@ -1,4 +1,5 @@
-﻿using CalculadoraCS.Model.Excecoes;
+﻿using CalculadoraCS.Model.DTO;
+using CalculadoraCS.Model.Excecoes;
 using CalculadoraCS.Model.Loader;
 using CalculadoraCS.Model.Operacao;
 using System;
@@ -21,11 +22,14 @@ namespace CalculadoraCS.Model.Calculadora
             fillOperacoes();
         }
 
-        public int calcular(int num1, string operador, int num2)
+        public ResponseOperacaoDTO calcular(RequestOperacaoDTO requestOperacaoDTO)
         {
-            IOperacao op = mapOperacao(operador);
-            
-            return op.calcular(num1, num2);
+            IOperacao op = mapOperacao(requestOperacaoDTO.Operador);
+
+            int num1 = requestOperacaoDTO.Num1;
+            int num2 = requestOperacaoDTO.Num2;
+            int result = op.calcular(num1, num2);
+            return new ResponseOperacaoDTO(result);
         }
 
         private IOperacao mapOperacao(string operador)
@@ -63,11 +67,12 @@ namespace CalculadoraCS.Model.Calculadora
             return calculadorasMap;
         }
 
-        public static ICalculadora criar(string idCalc)
+        public static ICalculadora criar(RequestCalculadoraDTO requestCalculadoraDTO)
         {
             ILoader<ICalculadora> loader = new CalculadoraLoader();
             HashSet<ICalculadora> allCalculadoras = loader.acessaClasses();
 
+            string idCalc = requestCalculadoraDTO.IdCalculadora;
             foreach (ICalculadora calc in allCalculadoras)
             {
                 if (calc.Identificador.Equals(idCalc))

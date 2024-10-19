@@ -1,4 +1,6 @@
-﻿using CalculadoraCS.View;
+﻿using CalculadoraCS.Controller;
+using CalculadoraCS.Model.DTO;
+using CalculadoraCS.View;
 using System;
 using System.Diagnostics.Metrics;
 
@@ -9,9 +11,11 @@ namespace CalculadoraCS.Application
         static void Main(string[] args)
         {
             Menu menu = new Menu();
-            string idCalc = menu.escolherCalculadora();
-            int resultado = menu.interagir(idCalc);
-            menu.exibirResultado(resultado);
+            RequestCalculadoraDTO requestCalculadoraDTO = menu.escolherCalculadora();
+            ControllerCalculadora controller = new ControllerCalculadora(requestCalculadoraDTO);
+            RequestOperacaoDTO requestOperacaoDTO = menu.interagir(controller);
+            ResponseOperacaoDTO responseOperacaoDTO = controller.calcular(requestOperacaoDTO);
+            menu.exibirResultado(responseOperacaoDTO);
         }
     }
 }
